@@ -1,7 +1,6 @@
 package com.pipemasters.serveraudio.service.impl;
 
 import com.pipemasters.serveraudio.exceptions.audio.AudioExtractionException;
-import com.pipemasters.serveraudio.service.AudioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
@@ -16,7 +15,6 @@ import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequ
 import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -103,7 +101,7 @@ public class AudioServiceImpl
                 log.debug("Uploading audio file to URL: {}", uploadRequest.uri());
                 httpClient.send(uploadRequest, HttpResponse.BodyHandlers.discarding());
                 log.debug("Audio file uploaded successfully: {}", targetName);
-                return "i will fix this i promise";
+                return targetName;
 
             } catch (IOException | InterruptedException e) {
                 log.error("Audio extraction failed with s3Key={}", s3Key, e);
