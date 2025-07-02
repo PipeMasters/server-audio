@@ -20,7 +20,7 @@ public class Сontroller {
 
     @GetMapping("/")
     public ResponseEntity<String> getPresignedDownloadUrl() throws IOException, InterruptedException {
-        String url = String.valueOf(audioService.extractAudio("81e10071-e297-4919-92c2-51bf019ff8c6/meow"));
+        String url = String.valueOf(audioService.extractAudio("81e10071-e297-4919-92c2-51bf019ff8c6/cinema22.mp4"));
         return ResponseEntity.ok(url);
     }
 }

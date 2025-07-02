@@ -94,7 +94,7 @@ public class AudioServiceImpl
 
 
                 HttpRequest uploadRequest = HttpRequest.newBuilder()
-                        .uri(URI.create(getUploadUrl(s3Key + "_audio.mp3")))
+                        .uri(URI.create(getUploadUrl(s3Key.replaceFirst("[.][^.]+$", "") + "_audio.mp3")))
                         .timeout(Duration.ofMinutes(2))
                         .PUT(HttpRequest.BodyPublishers.ofFile(audioFile))
                         .build();
