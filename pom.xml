@@ -81,6 +81,11 @@
                 <configuration>
                     <image>
                         <builder>paketobuildpacks/builder-jammy-full:latest</builder>
+
+                        <buildpacks>
+                            <buildpack>docker://docker.io/dmikusa/apt-buildpack:0.0.2</buildpack>
+                        </buildpacks>
+
                         <env>
                             <BP_APT_PACKAGES>ffmpeg</BP_APT_PACKAGES>
                         </env>
