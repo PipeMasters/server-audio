@@ -91,6 +91,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <builder>pipemasters/builder-jammy-full-ffmpeg:1.0</builder>
+                        <runImage>pipemasters/run-jammy-full-ffmpeg:1.0</runImage>
+                    </image>
+                </configuration>
             </plugin>
         </plugins>
     </build>
