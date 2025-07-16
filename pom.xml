@@ -81,9 +81,6 @@
                 <configuration>
                     <image>
                         <builder>paketobuildpacks/builder-jammy-full:latest</builder>
-                        <buildpacks>
-                            <buildpack>paketobuildpacks/apt:latest</buildpack>
-                        </buildpacks>
                         <env>
                             <BP_APT_PACKAGES>ffmpeg</BP_APT_PACKAGES>
                         </env>
