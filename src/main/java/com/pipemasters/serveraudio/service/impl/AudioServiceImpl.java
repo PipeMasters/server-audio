@@ -6,6 +6,7 @@ import com.pipemasters.serveraudio.service.AudioService;
 import feign.Feign;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,8 @@ import java.util.concurrent.CompletableFuture;
 
 @Service
 public class AudioServiceImpl implements AudioService {
+    @Value("${server-main.url}")
+    private String mainServerUrl;
     private final Logger log = LoggerFactory.getLogger(AudioServiceImpl.class);
     private final HttpClient httpClient = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(30))
@@ -78,7 +81,6 @@ public class AudioServiceImpl implements AudioService {
 
                 HttpRequest uploadRequest = HttpRequest.newBuilder()
                         .uri(URI.create(getUploadUrl(s3Key)))
-//                        .uri(URI.create(getUploadUrl(s3Key.replaceFirst("[.][^.]+$", "") + "_audio.mp3")))
                         .timeout(Duration.ofMinutes(2))
                         .PUT(HttpRequest.BodyPublishers.ofFile(audioFile))
                         .build();
@@ -98,16 +100,14 @@ public class AudioServiceImpl implements AudioService {
 
     private String getDownloadUrl(String s3Key) {
         FileClient fileClient = Feign.builder()
-                .target(FileClient.class,
-                        "http://localhost:8080");
+                .target(FileClient.class, mainServerUrl);
 
         return fileClient.getDownloadUrl(s3Key);
     }
 
     private String getUploadUrl(String s3Key) {
         FileClient fileClient = Feign.builder()
-                .target(FileClient.class,
-                        "http://localhost:8080");
+                .target(FileClient.class,mainServerUrl);
         return fileClient.getUploadUrlAudio(s3Key);
     }
 
