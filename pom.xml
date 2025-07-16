@@ -80,7 +80,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>
+                        <builder>paketobuildpacks/builder-jammy-full:latest</builder>
                         <buildpacks>
                             <buildpack>paketobuildpacks/apt:latest</buildpack>
                         </buildpacks>
