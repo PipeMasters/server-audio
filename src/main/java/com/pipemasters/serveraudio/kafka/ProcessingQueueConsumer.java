@@ -23,6 +23,7 @@ public class ProcessingQueueConsumer {
     @KafkaListener(topics = "audio-extraction")
     @Transactional
     public void process(String message) {
+        log.info("Accept message with :{}",message);
         audioService.extractAudio(message)
                 .thenAccept(result -> producerService.send("processed",result))
                 .exceptionally(e -> {
