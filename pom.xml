@@ -83,7 +83,7 @@
                         <builder>paketobuildpacks/builder-jammy-full:latest</builder>
 
                         <buildpacks>
-                            <buildpack>docker://docker.io/dmikusa/apt-buildpack:0.0.2</buildpack>
+                            <buildpack>ghcr.io/fagiani/buildpacks/fagiani_apt:0.2.6</buildpack>
                         </buildpacks>
 
                         <env>
