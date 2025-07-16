@@ -80,15 +80,16 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <builder>paketobuildpacks/builder-jammy-full:latest</builder>
+<!--                        <builder>paketobuildpacks/builder-jammy-full:latest</builder>-->
+                        <builder>my-registry/builder-jammy-full-ffmpeg:1.0</builder>
 
-                        <buildpacks>
-                            <buildpack>ghcr.io/fagiani/buildpacks/fagiani_apt:0.2.6</buildpack>
-                        </buildpacks>
+<!--                        <buildpacks>-->
+<!--                            <buildpack>ghcr.io/fagiani/buildpacks/fagiani_apt:0.2.6</buildpack>-->
+<!--                        </buildpacks>-->
 
-                        <env>
-                            <BP_APT_PACKAGES>ffmpeg</BP_APT_PACKAGES>
-                        </env>
+<!--                        <env>-->
+<!--                            <BP_APT_PACKAGES>ffmpeg</BP_APT_PACKAGES>-->
+<!--                        </env>-->
                     </image>
                 </configuration>
             </plugin>
