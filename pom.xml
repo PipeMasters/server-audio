@@ -81,8 +81,8 @@
                 <configuration>
                     <image>
                         <!--                        <builder>paketobuildpacks/builder-jammy-full:latest</builder>-->
-                        <builder>builder-jammy-full-ffmpeg:1.0</builder>
-                        <runImage>run-jammy-full-ffmpeg:1.0</runImage>
+                        <builder>pipemasters/builder-jammy-full-ffmpeg:1.0</builder>
+                        <runImage>pipemasters/run-jammy-full-ffmpeg:1.0</runImage>
 
                         <!--                        <buildpacks>-->
                         <!--                            <buildpack>ghcr.io/fagiani/buildpacks/fagiani_apt:0.2.6</buildpack>-->
