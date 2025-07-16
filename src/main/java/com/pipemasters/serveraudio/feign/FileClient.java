@@ -7,6 +7,6 @@ public interface FileClient {
     @RequestLine("POST /api/v1/files/upload-url-audio?sourceKey={sourceKey}")
     String getUploadUrlAudio(@Param("sourceKey") String sourceKey);
 
-    @RequestLine("POST /api/v1/files/download-url-video?sourceKey={sourceKey}")
+    @RequestLine("GET /api/v1/files/download-url?sourceKey={sourceKey}")
     String getDownloadUrl(@Param("sourceKey") String sourceKey);
 }
