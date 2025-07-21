@@ -1,12 +1,17 @@
 package com.pipemasters.serveraudio.feign;
 
-import feign.Param;
-import feign.RequestLine;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+@FeignClient(name = "file-service", url = "${server-main.url}")
 public interface FileClient {
-    @RequestLine("POST /api/v1/files/upload-url-audio?sourceKey={sourceKey}")
-    String getUploadUrlAudio(@Param("sourceKey") String sourceKey);
+    @PostMapping("/api/v1/files/upload-url-audio")
+    String getUploadUrlAudio(@RequestParam("sourceKey") String sourceKey,
+                             @RequestParam("duration") Long duration,
+                             @RequestParam("hash") String hash);
 
-    @RequestLine("GET /api/v1/files/download-url?sourceKey={sourceKey}")
-    String getDownloadUrl(@Param("sourceKey") String sourceKey);
+    @GetMapping("/api/v1/files/download-url")
+    String getDownloadUrl(@RequestParam("sourceKey") String sourceKey);
 }
