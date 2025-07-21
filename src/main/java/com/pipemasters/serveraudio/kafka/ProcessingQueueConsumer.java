@@ -1,5 +1,6 @@
 package com.pipemasters.serveraudio.kafka;
 
+import com.pipemasters.serveraudio.service.AudioService;
 import com.pipemasters.serveraudio.service.impl.AudioServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProcessingQueueConsumer {
     private final Logger log = LoggerFactory.getLogger(ProcessingQueueConsumer.class);
 
-    private final AudioServiceImpl audioService;
+    private final AudioService audioService;
     private final KafkaProducerService producerService;
 
-    public ProcessingQueueConsumer(AudioServiceImpl audioService, KafkaProducerService producerService) {
+    public ProcessingQueueConsumer(AudioService audioService, KafkaProducerService producerService) {
         this.audioService = audioService;
         this.producerService = producerService;
     }
@@ -23,12 +24,12 @@ public class ProcessingQueueConsumer {
     @KafkaListener(topics = "audio-extraction")
     @Transactional
     public void process(String message) {
-        log.info("Accept message with :{}",message);
-        audioService.extractAudio(message)
-                .thenAccept(result -> producerService.send("processed",result))
-                .exceptionally(e -> {
-                    log.error("Audio extraction failed", e);
-                    return null;
-                });
+        log.info("Received message: {}", message);
+        try {
+            String result = audioService.extractAudio(message);
+            producerService.send("processed", result);
+        } catch (Exception e) {
+            log.error("Audio extraction failed for message: {}", message, e);
+        }
     }
 }

@@ -19,9 +19,9 @@ public class FeignTests {
         FileClient fileClient = Feign.builder()
                 .target(FileClient.class, mainServerUrl);
 
-        String uploadUrl = fileClient.getUploadUrlAudio(s3Key);
+//        String uploadUrl = fileClient.getUploadUrlAudio(s3Key);
 
-        System.out.println(uploadUrl);
+//        System.out.println(uploadUrl);
     }
 
     @Test
